@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101820">
+  <title>Mario y Luigi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">◉</span><span>Mario <b>y Luigi</b></span></div>
+      <div class="status"><span class="status-dot"></span><span id="statusText">SISTEMA EN ESPERA // 4D</span></div>
+    </header>
+
+    <section class="game-layout">
+      <div class="game-column">
+        <div class="hud" aria-label="Marcador">
+          <div class="hud-item"><span>PUNTOS</span><strong id="score">000000</strong></div>
+          <div class="hud-item"><span>RÉCORD</span><strong id="best">000000</strong></div>
+          <div class="hud-item"><span>NIVEL</span><strong id="level">1 / 10</strong></div>
+          <button class="icon-button" id="musicButton" type="button" aria-label="Activar música" title="Música">♫</button>
+          <button class="icon-button" id="pauseButton" type="button" aria-label="Pausar juego" title="Pausar (P)" disabled>Ⅱ</button>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="gameCanvas" aria-label="Área de juego de Mario y Luigi"></canvas>
+          <div class="overlay" id="startOverlay">
+            <p class="eyebrow">AVENTURA 01 // REINO DEL HONGO</p>
+            <h1>Corre hasta<br><em>la bandera.</em></h1>
+            <p class="intro">Salta plataformas, recoge monedas y lleva a Mario y Luigi hasta el final de cada nivel.</p>
+            <div class="mode-picker" aria-label="Número de jugadores">
+              <button class="mode-button" id="onePlayerButton" type="button">1 jugador</button>
+              <button class="mode-button selected" id="twoPlayerButton" type="button">2 jugadores</button>
+            </div>
+            <button class="primary-button" id="startButton" type="button"><span>Comenzar aventura</span><b>↗</b></button>
+            <p class="hint">Mario <kbd>A</kbd><kbd>D</kbd><kbd>W</kbd> · Luigi <kbd>J</kbd><kbd>L</kbd><kbd>I</kbd></p>
+          </div>
+          <div class="overlay hidden" id="gameOverOverlay">
+            <p class="eyebrow">FIN DE PARTIDA</p>
+            <h2>La aventura<br><em>terminó.</em></h2>
+            <p class="final-score">PUNTUACIÓN <strong id="finalScore">000000</strong></p>
+            <button class="primary-button" id="restartButton" type="button"><span>Jugar de nuevo</span><b>↻</b></button>
+          </div>
+          <div class="overlay hidden pause-overlay" id="pauseOverlay">
+            <p class="eyebrow">AVENTURA CONGELADA</p>
+            <h2>En pausa.</h2>
+            <button class="primary-button" id="resumeButton" type="button"><span>Continuar</span><b>▶</b></button>
+          </div>
+          <div class="mobile-controls" aria-label="Controles táctiles">
+            <div class="touch-player" id="marioTouchControls">
+              <span class="touch-label">MARIO</span>
+              <button class="touch-button" data-key="a" type="button" aria-label="Mario izquierda">←</button>
+              <button class="touch-button" data-key="d" type="button" aria-label="Mario derecha">→</button>
+              <button class="touch-button jump-button" data-key="w" type="button" aria-label="Mario saltar">↑</button>
+            </div>
+            <div class="touch-player" id="luigiTouchControls">
+              <span class="touch-label">LUIGI</span>
+              <button class="touch-button" data-key="j" type="button" aria-label="Luigi izquierda">←</button>
+              <button class="touch-button" data-key="l" type="button" aria-label="Luigi derecha">→</button>
+              <button class="touch-button jump-button" data-key="i" type="button" aria-label="Luigi saltar">↑</button>
+            </div>
+        </div>
+      </div>
+
+      <aside class="mission-panel">
+        <div class="panel-heading"><span class="eyebrow">MODO AVENTURA</span><span class="live-label">● 10 NIVELES</span></div>
+        <h2>Corre, salta,<br><em>avanza.</em></h2>
+        <p class="panel-copy">Mario y Luigi recorren diez mundos cada vez más difíciles. Las monedas suman puntos y los cubos de poder mejoran el salto y la velocidad.</p>
+        <div class="legend">
+          <div class="legend-row"><span class="legend-icon pulse-icon">●</span><div><b>Moneda</b><small>+50 puntos</small></div></div>
+          <div class="legend-row"><span class="legend-icon power-icon">?</span><div><b>Cubo de poder</b><small>Impulso durante 8 s</small></div></div>
+          <div class="legend-row"><span class="legend-icon obstacle-icon">▲</span><div><b>Obstáculo</b><small>Salta sobre él</small></div></div>
+          <div class="legend-row"><span class="legend-icon shard-icon">✦</span><div><b>Enemigo</b><small>Salta o esquívalo</small></div></div>
+        </div>
+        <div class="mission-note"><span>OBJETIVO ACTUAL</span><strong>Completa los 10 niveles</strong><div class="progress-track"><i id="progressBar"></i></div></div>
+        <div class="controls-note"><span>CONTROLES</span><div><kbd>A</kbd><kbd>D</kbd><kbd>W</kbd><span>Mario</span><kbd>J</kbd><kbd>L</kbd><kbd>I</kbd><span>Luigi</span><kbd>P</kbd><span>pausa</span></div></div>
+      </aside>
+    </section>
+    <footer><span>MARIO Y LUIGI / 2026</span><span class="footer-right">DIEZ NIVELES / UNA BANDERA</span></footer>
+  </main>
+  <script src="platformer.js"></script>
+</body>
+</html>
